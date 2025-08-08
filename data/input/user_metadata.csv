@@ -1,0 +1,101 @@
+User_ID,Cluster_ID,Job_Title,Department
+U001,C02,Billing Specialist,Finance
+U002,C04,Pharmacist,Pharmacy
+U003,C05,MRI Technician,Radiology
+U004,C03,Access Control Analyst,IT Security
+U005,C04,Pharmacist,Pharmacy
+U006,C03,IT Administrator,IT Security
+U007,C02,Claims Coordinator,Finance
+U008,C02,Billing Specialist,Finance
+U009,C04,Pharmacy Technician,Pharmacy
+U010,C03,Access Control Analyst,IT Security
+U011,C01,Resident Doctor,Clinical Services
+U012,C03,IT Administrator,IT Security
+U013,C04,Pharmacy Technician,Pharmacy
+U014,C03,IT Administrator,IT Security
+U015,C02,Claims Coordinator,Finance
+U016,C04,Pharmacy Technician,Pharmacy
+U017,C02,Claims Coordinator,Finance
+U018,C02,Claims Coordinator,Finance
+U019,C03,IT Administrator,IT Security
+U020,C01,Physician,Clinical Services
+U021,C01,Physician,Clinical Services
+U022,C03,IT Administrator,IT Security
+U023,C03,Support Engineer,IT Security
+U024,C04,Pharmacist,Pharmacy
+U025,C03,Support Engineer,IT Security
+U026,C05,Radiologist,Radiology
+U027,C04,Pharmacy Technician,Pharmacy
+U028,C02,Claims Coordinator,Finance
+U029,C05,X-Ray Technician,Radiology
+U030,C05,Radiologist,Radiology
+U031,C04,Pharmacy Technician,Pharmacy
+U032,C05,X-Ray Technician,Radiology
+U033,C01,Physician Assistant,Clinical Services
+U034,C01,Senior Nurse,Clinical Services
+U035,C05,Radiologist,Radiology
+U036,C04,Medication Aide,Pharmacy
+U037,C03,Support Engineer,IT Security
+U038,C04,Medication Aide,Pharmacy
+U039,C03,IT Administrator,IT Security
+U040,C03,Access Control Analyst,IT Security
+U041,C02,Claims Coordinator,Finance
+U042,C04,Pharmacy Technician,Pharmacy
+U043,C03,Access Control Analyst,IT Security
+U044,C01,Nurse Practitioner,Clinical Services
+U045,C05,Radiologist,Radiology
+U046,C05,Radiologist,Radiology
+U047,C04,Medication Aide,Pharmacy
+U048,C04,Medication Aide,Pharmacy
+U049,C04,Medication Aide,Pharmacy
+U050,C03,Access Control Analyst,IT Security
+U051,C04,Pharmacist,Pharmacy
+U052,C02,Claims Coordinator,Finance
+U053,C02,Billing Specialist,Finance
+U054,C05,MRI Technician,Radiology
+U055,C03,Support Engineer,IT Security
+U056,C04,Pharmacist,Pharmacy
+U057,C01,Physician,Clinical Services
+U058,C03,Support Engineer,IT Security
+U059,C02,Claims Coordinator,Finance
+U060,C04,Medication Aide,Pharmacy
+U061,C02,Claims Coordinator,Finance
+U062,C04,Pharmacy Technician,Pharmacy
+U063,C04,Pharmacist,Pharmacy
+U064,C01,Physician Assistant,Clinical Services
+U065,C05,Radiologist,Radiology
+U066,C01,Physician Assistant,Clinical Services
+U067,C02,Billing Specialist,Finance
+U068,C04,Medication Aide,Pharmacy
+U069,C01,Physician,Clinical Services
+U070,C01,Nurse Practitioner,Clinical Services
+U071,C05,X-Ray Technician,Radiology
+U072,C04,Pharmacy Technician,Pharmacy
+U073,C02,Billing Specialist,Finance
+U074,C05,Radiologist,Radiology
+U075,C04,Medication Aide,Pharmacy
+U076,C03,IT Administrator,IT Security
+U077,C04,Pharmacy Technician,Pharmacy
+U078,C01,Nurse Practitioner,Clinical Services
+U079,C01,Physician,Clinical Services
+U080,C02,Medical Biller,Finance
+U081,C04,Pharmacist,Pharmacy
+U082,C01,Nurse Practitioner,Clinical Services
+U083,C03,IT Administrator,IT Security
+U084,C03,Access Control Analyst,IT Security
+U085,C02,Medical Biller,Finance
+U086,C01,Resident Doctor,Clinical Services
+U087,C05,X-Ray Technician,Radiology
+U088,C04,Pharmacist,Pharmacy
+U089,C03,IT Administrator,IT Security
+U090,C04,Pharmacist,Pharmacy
+U091,C03,Access Control Analyst,IT Security
+U092,C03,IT Administrator,IT Security
+U093,C01,Senior Nurse,Clinical Services
+U094,C05,MRI Technician,Radiology
+U095,C04,Pharmacist,Pharmacy
+U096,C01,Resident Doctor,Clinical Services
+U097,C04,Medication Aide,Pharmacy
+U098,C01,Physician Assistant,Clinical Services
+U099,C01,Physician,Clinical Services
+U100,C03,Access Control Analyst,IT Security

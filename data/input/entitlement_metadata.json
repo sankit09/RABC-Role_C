@@ -1,0 +1,78 @@
+{
+  "E01": {
+    "name": "View Patient Records",
+    "description": "Allows read-only access to all patient medical history and diagnosis data."
+  },
+  "E02": {
+    "name": "Edit Patient Records",
+    "description": "Allows editing of patient charts, medications, and diagnosis notes."
+  },
+  "E03": {
+    "name": "Access Lab Results",
+    "description": "Provides access to lab result databases and test outcomes."
+  },
+  "E04": {
+    "name": "Schedule Appointments",
+    "description": "Grants rights to schedule, reschedule, or cancel appointments."
+  },
+  "E05": {
+    "name": "Prescribe Medications",
+    "description": "Allows medical staff to prescribe drugs through the electronic system."
+  },
+  "E06": {
+    "name": "Billing Access",
+    "description": "Grants access to patient billing records and payment history."
+  },
+  "E07": {
+    "name": "Insurance Verification",
+    "description": "Allows verification of patient insurance details before treatment."
+  },
+  "E08": {
+    "name": "Generate Financial Reports",
+    "description": "Provides access to generate monthly and quarterly financial reports."
+  },
+  "E09": {
+    "name": "Manage User Accounts",
+    "description": "Allows IT staff to create, modify, and disable user accounts."
+  },
+  "E10": {
+    "name": "Access System Logs",
+    "description": "Provides read-only access to system security and audit logs."
+  },
+  "E11": {
+    "name": "Reset Passwords",
+    "description": "Allows resetting of user passwords upon request."
+  },
+  "E12": {
+    "name": "Configure Access Policies",
+    "description": "Permits defining role-based access policies and entitlements."
+  },
+  "E13": {
+    "name": "Dispense Medications",
+    "description": "Allows pharmacy staff to dispense medications based on prescriptions."
+  },
+  "E14": {
+    "name": "Manage Inventory",
+    "description": "Provides access to manage stock levels of pharmaceuticals and supplies."
+  },
+  "E15": {
+    "name": "Access Drug Database",
+    "description": "Allows searching drug interactions and contraindications."
+  },
+  "E16": {
+    "name": "Access Radiology Reports",
+    "description": "Permits viewing of diagnostic imaging reports."
+  },
+  "E17": {
+    "name": "Order Imaging Procedures",
+    "description": "Allows authorized staff to order X-rays, CT scans, or MRIs."
+  },
+  "E18": {
+    "name": "Upload Imaging Results",
+    "description": "Permits technicians to upload diagnostic image results to patient records."
+  },
+  "E19": {
+    "name": "Radiation Safety Log Access",
+    "description": "Grants access to logs and protocols related to radiation exposure."
+  }
+}

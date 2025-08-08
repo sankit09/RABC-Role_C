@@ -1,0 +1,6 @@
+Cluster_ID,Entitlement_Count,User_Count,Core_Entitlements
+C01,5,19,"E01,E02,E03,E04,E05"
+C02,3,16,"E06,E07,E08"
+C03,4,23,"E09,E10,E11,E12"
+C04,3,28,"E13,E14,E15"
+C05,4,14,"E16,E17,E18,E19"

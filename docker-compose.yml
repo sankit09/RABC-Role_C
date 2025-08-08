@@ -1,0 +1,25 @@
+# docker-compose.yml
+"""
+version: '3.8'
+
+services:
+  rbac-api:
+    build: .
+    container_name: rbac-role-mining
+    ports:
+      - "8000:8000"
+    environment:
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
+      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION}
+      - AZURE_OPENAI_DEPLOYMENT_NAME=${AZURE_OPENAI_DEPLOYMENT_NAME}
+      - USE_LANGCHAIN=${USE_LANGCHAIN:-false}
+      - DEBUG=${DEBUG:-true}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./data:/app/data
+      - ./app:/app/app  # For development hot-reload
+    env_file:
+      - .env
+    restart: unless-stopped
+"""
