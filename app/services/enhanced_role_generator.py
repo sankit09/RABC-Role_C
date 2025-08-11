@@ -1,8 +1,5 @@
 # app/services/enhanced_role_generator.py
-# This should use ENHANCED PromptManager
-# ==============================================
-
-"""Enhanced role generation service for multiple options"""
+"""Enhanced role generation service for multiple options - FIXED"""
 
 import asyncio
 import logging
@@ -10,7 +7,7 @@ from typing import Dict, Optional, List
 from datetime import datetime
 from app.models.enhanced_models import GeneratedRoleSet, RoleOption, RoleStyle
 from app.core.llm_client import AzureOpenAIClient
-from app.core.prompt_manager_enhanced import EnhancedPromptManager  # ← ENHANCED
+from app.core.prompt_manager_enhanced import EnhancedPromptManager
 from app.services.data_processor import DataProcessor
 from app.config import settings
 
@@ -20,11 +17,10 @@ class EnhancedRoleGeneratorService:
     """Service for generating multiple RBAC role options"""
     
     def __init__(self):
-        self.llm_client = None
-        self.prompt_manager = EnhancedPromptManager()  # ← ENHANCED
+        self.llm_client = None  # Lazy initialization
+        self.prompt_manager = EnhancedPromptManager()
         self.data_processor = DataProcessor()
         self.generated_role_sets: Dict[str, GeneratedRoleSet] = {}
-    
     
     def _get_llm_client(self) -> AzureOpenAIClient:
         """Get or create LLM client (lazy initialization)"""
@@ -80,14 +76,14 @@ class EnhancedRoleGeneratorService:
                 )
                 role_options.append(role_option)
             
-            # Create GeneratedRoleSet object
+            # Create GeneratedRoleSet object with entitlements included
             generated_role_set = GeneratedRoleSet(
                 cluster_id=cluster_id,
                 role_options=role_options,
                 recommended_option=llm_response.get('recommended_option', 1),
                 recommendation_reason=llm_response.get('recommendation_reason', ''),
                 risk_level=llm_response.get('risk_level', 'MEDIUM'),
-                entitlements=cluster_data.core_entitlements,
+                entitlements=cluster_data.core_entitlements,  # Include entitlements ONCE
                 user_summary=cluster_data.user_summary.to_dict(),
                 generated_at=datetime.now()
             )

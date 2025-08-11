@@ -239,6 +239,20 @@ elif page == "🎯 Generate Roles":
         
         st.subheader("Generated Role Options")
         
+        # Show entitlements if available
+        if "entitlements" in role and role["entitlements"]:
+            with st.expander(f"📋 View {len(role['entitlements'])} Entitlements for this Role", expanded=False):
+                for ent in role["entitlements"]:
+                    if isinstance(ent, dict):
+                        col1, col2 = st.columns([1, 3])
+                        with col1:
+                            st.write(f"**{ent.get('id', 'N/A')}**")
+                        with col2:
+                            st.write(f"**{ent.get('name', 'N/A')}**")
+                            st.caption(ent.get('description', 'No description'))
+                    else:
+                        st.write(f"• {ent}")
+        
         # Show AI recommendation
         recommended = role.get("recommended_option", 1)
         if role.get("recommendation_reason"):

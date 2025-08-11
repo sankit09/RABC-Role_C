@@ -1,5 +1,5 @@
 # app/api/v1/endpoints/enhanced_roles.py
-"""Enhanced role generation endpoints for multiple role options"""
+"""Enhanced role generation endpoints with entitlements - FIXED"""
 
 from fastapi import APIRouter, HTTPException
 import logging
@@ -19,34 +19,54 @@ router = APIRouter()
 # Initialize service
 enhanced_role_service = EnhancedRoleGeneratorService()
 
-@router.post("/generate-multiple", response_model=MultipleRolesResponse)
+@router.post("/generate-multiple", response_model=None)  # Remove response_model to return custom dict
 async def generate_multiple_role_options(request: GenerateMultipleRolesRequest):
-    """Generate 3 role options for a single cluster"""
+    """Generate 3 role options for a single cluster with entitlements"""
     try:
         role_set = await enhanced_role_service.generate_multiple_options(
             cluster_id=request.cluster_id,
             force_regenerate=request.force_regenerate
         )
         
-        return MultipleRolesResponse(
-            cluster_id=role_set.cluster_id,
-            role_options=[
-                RoleOptionResponse(
-                    option_number=opt.option_number,
-                    role_name=opt.role_name,
-                    style=opt.style.value,
-                    description=opt.description,
-                    rationale=opt.rationale
-                )
+        # Format entitlements for response
+        entitlements_list = []
+        if hasattr(role_set, 'entitlements') and role_set.entitlements:
+            for ent in role_set.entitlements:
+                if hasattr(ent, 'to_dict'):
+                    entitlements_list.append(ent.to_dict())
+                else:
+                    entitlements_list.append({
+                        "id": getattr(ent, 'id', 'N/A'),
+                        "name": getattr(ent, 'name', 'N/A'),
+                        "description": getattr(ent, 'description', 'N/A')
+                    })
+        
+        # Build comprehensive response including entitlements
+        response = {
+            "cluster_id": role_set.cluster_id,
+            "role_options": [
+                {
+                    "option_number": opt.option_number,
+                    "role_name": opt.role_name,
+                    "style": opt.style.value,
+                    "description": opt.description,
+                    "rationale": opt.rationale
+                }
                 for opt in role_set.role_options
             ],
-            recommended_option=role_set.recommended_option,
-            recommendation_reason=role_set.recommendation_reason,
-            risk_level=role_set.risk_level,
-            entitlement_count=len(role_set.entitlements),
-            user_count=role_set.user_summary.get("total_users", 0),
-            generated_at=role_set.generated_at
-        )
+            "recommended_option": role_set.recommended_option,
+            "recommendation_reason": role_set.recommendation_reason,
+            "risk_level": role_set.risk_level,
+            "entitlement_count": len(role_set.entitlements) if role_set.entitlements else 0,
+            "user_count": role_set.user_summary.get("total_users", 0),
+            "generated_at": role_set.generated_at.isoformat() if role_set.generated_at else datetime.now().isoformat(),
+            "entitlements": entitlements_list,  # ADD THIS - Include full entitlement details
+            "user_summary": role_set.user_summary  # Include user summary for additional context
+        }
+        
+        logger.info(f"Generated response with {len(entitlements_list)} entitlements for cluster {request.cluster_id}")
+        return response
+        
     except Exception as e:
         logger.error(f"Multiple role generation failed: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -73,15 +93,29 @@ async def select_role_option(request: SelectRoleRequest):
 
 @router.get("/comparison/{cluster_id}")
 async def get_role_comparison(cluster_id: str):
-    """Get side-by-side comparison of all role options for a cluster"""
+    """Get side-by-side comparison of all role options with entitlements for a cluster"""
     try:
         role_set = enhanced_role_service.get_role_set(cluster_id)
         if not role_set:
             raise HTTPException(status_code=404, detail=f"No roles found for cluster {cluster_id}")
         
+        # Format entitlements
+        entitlements_list = []
+        if hasattr(role_set, 'entitlements') and role_set.entitlements:
+            for ent in role_set.entitlements:
+                if hasattr(ent, 'to_dict'):
+                    entitlements_list.append(ent.to_dict())
+                else:
+                    entitlements_list.append({
+                        "id": getattr(ent, 'id', 'N/A'),
+                        "name": getattr(ent, 'name', 'N/A'),
+                        "description": getattr(ent, 'description', 'N/A')
+                    })
+        
         comparison = {
             "cluster_id": cluster_id,
-            "comparison_table": []
+            "comparison_table": [],
+            "entitlements": entitlements_list  # Include entitlements in comparison
         }
         
         # Create comparison table
@@ -104,6 +138,3 @@ async def get_role_comparison(cluster_id: str):
     except Exception as e:
         logger.error(f"Failed to get role comparison: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
-
-# Add these endpoints to your existing API router in app/api/v1/api.py:
-# api_router.include_router(enhanced_roles.router, prefix="/roles", tags=["enhanced_roles"])
