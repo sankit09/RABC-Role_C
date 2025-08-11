@@ -1,5 +1,5 @@
 # app/core/prompt_manager.py
-"""Prompt template management"""
+"""Prompt template management for role generation"""
 
 from typing import List, Dict
 from app.models.domain import ClusterData, Entitlement

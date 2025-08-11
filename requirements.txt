@@ -1,15 +1,36 @@
-# requirements.txt
+# requirements.txt - Updated with Streamlit and dependencies
+
+# Core FastAPI Requirements
 fastapi==0.115.0
 uvicorn[standard]==0.32.0
 pydantic==2.9.0
 pydantic-settings==2.5.0
 python-multipart==0.0.12
+
+# Data Processing
 pandas==2.2.3
-openai==1.30.0
+openpyxl==3.1.2  # For Excel export
+
+# Azure OpenAI
+openai
 httpx==0.27.0
-langchain==0.3.0
-langchain-openai==0.2.0
-langchain-core==0.3.0
+
+# Optional LangChain
+langchain
+langchain-openai
+langchain-core
+
+# Streamlit Dashboard
+streamlit==1.32.0
+plotly==5.20.0
+altair==5.2.0
+
+# Utilities
 python-dotenv==1.0.1
 aiofiles==24.1.0
 requests==2.32.3
+
+# Development
+pytest==8.0.0
+pytest-asyncio==0.23.0
+black==24.1.0

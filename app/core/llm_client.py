@@ -1,5 +1,5 @@
 # app/core/llm_client.py
-"""Azure OpenAI client wrapper with LangChain support"""
+"""Azure OpenAI client wrapper with LangChain support - FIXED FOR WINDOWS"""
 
 import logging
 from typing import Dict, Optional, Any
@@ -176,7 +176,11 @@ class AzureOpenAIClient:
                 messages=[{"role": "user", "content": "Say 'Connected'"}],
                 max_tokens=10
             )
-            logger.info(f"Connection test successful: {response.choices[0].message.content}")
+            # Remove emojis from log message to avoid Windows encoding issues
+            message = response.choices[0].message.content
+            # Clean any non-ASCII characters for Windows compatibility
+            clean_message = message.encode('ascii', 'ignore').decode('ascii')
+            logger.info(f"Connection test successful: {clean_message}")
             return True
         except Exception as e:
             logger.error(f"Connection test failed: {str(e)}")

@@ -1,4 +1,7 @@
 # app/services/role_generator.py
+# This should use REGULAR PromptManager
+# ==============================================
+
 """Role generation service"""
 
 import asyncio
@@ -8,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from app.models.domain import ClusterData, GeneratedRole, RiskLevel
 from app.core.llm_client import AzureOpenAIClient
-from app.core.prompt_manager import PromptManager
+from app.core.prompt_manager import PromptManager  # ← REGULAR PromptManager
 from app.services.data_processor import DataProcessor
 from app.config import settings
 
@@ -18,10 +21,11 @@ class RoleGeneratorService:
     """Service for generating RBAC roles"""
     
     def __init__(self):
-        self.llm_client = None  # Lazy initialization
-        self.prompt_manager = PromptManager()
+        self.llm_client = None
+        self.prompt_manager = PromptManager()  # ← REGULAR PromptManager
         self.data_processor = DataProcessor()
         self.generated_roles: Dict[str, GeneratedRole] = {}
+    
     
     def _get_llm_client(self) -> AzureOpenAIClient:
         """Get or create LLM client (lazy initialization)"""

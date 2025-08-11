@@ -1,9 +1,10 @@
 # app/api/v1/endpoints/clusters.py
-"""Cluster management endpoints"""
+"""Cluster management endpoints - FIXED VERSION"""
 
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from typing import List
 import logging
+import pandas as pd
 from app.models.responses import ClusterSummaryResponse, FileUploadResponse
 from app.services.data_processor import DataProcessor
 from app.services.file_handler import FileHandlerService
@@ -19,19 +20,29 @@ file_handler = FileHandlerService()
 async def list_clusters():
     """List all available clusters"""
     try:
-        if not data_processor.cluster_summary:
+        # Check if data is loaded properly using pandas method
+        if data_processor.cluster_summary is None or data_processor.cluster_summary.empty:
             data_processor.load_data_files()
+        
+        # Additional check after loading
+        if data_processor.cluster_summary is None or data_processor.cluster_summary.empty:
+            logger.warning("No cluster data available after loading")
+            return []
         
         clusters = []
         for _, row in data_processor.cluster_summary.iterrows():
-            cluster_data = data_processor.process_cluster(row['Cluster_ID'])
-            clusters.append(ClusterSummaryResponse(
-                cluster_id=row['Cluster_ID'],
-                entitlement_count=cluster_data.entitlement_count,
-                user_count=cluster_data.user_summary.total_users,
-                top_job_titles=cluster_data.user_summary.top_job_titles,
-                top_departments=cluster_data.user_summary.top_departments
-            ))
+            try:
+                cluster_data = data_processor.process_cluster(row['Cluster_ID'])
+                clusters.append(ClusterSummaryResponse(
+                    cluster_id=row['Cluster_ID'],
+                    entitlement_count=cluster_data.entitlement_count,
+                    user_count=cluster_data.user_summary.total_users,
+                    top_job_titles=cluster_data.user_summary.top_job_titles,
+                    top_departments=cluster_data.user_summary.top_departments
+                ))
+            except Exception as e:
+                logger.error(f"Error processing cluster {row['Cluster_ID']}: {str(e)}")
+                continue
         
         return clusters
     except Exception as e:
@@ -42,7 +53,8 @@ async def list_clusters():
 async def get_cluster_details(cluster_id: str):
     """Get details for a specific cluster"""
     try:
-        if not data_processor.cluster_summary:
+        # Check if data is loaded properly
+        if data_processor.cluster_summary is None or data_processor.cluster_summary.empty:
             data_processor.load_data_files()
         
         cluster_data = data_processor.process_cluster(cluster_id)
